@@ -5,7 +5,8 @@ from pages.product_page import ProductPage
 
 
 # 1. User can add product to basket
-
+@pytest.mark.need_review
+@pytest.mark.need_review_custom_scenarios
 def test_user_can_add_product_to_basket(browser):
     # Arrange
     main_page = MainPage(browser)
@@ -25,7 +26,7 @@ def test_user_can_add_product_to_basket(browser):
 
 
 # 2. Guest can add product to basket
-
+@pytest.mark.need_review
 def test_guest_can_add_product_to_basket(browser):
     # Arrange
     main_page = MainPage(browser)
@@ -42,7 +43,8 @@ def test_guest_can_add_product_to_basket(browser):
 
 
 # 3. Guest can't see product in basket opened from product page
-
+@pytest.mark.need_review
+@pytest.mark.xfail
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     # Arrange
     main_page = MainPage(browser)
@@ -56,11 +58,11 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     main_page.go_to_basket_page()
 
     # Assert
-    #product_page.check_message_for_unauthorized_user()
+    product_page.check_message_for_unauthorized_user()
 
 
 # 4. Guest can go to login page from product_page
-
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     # Arrange
     main_page = MainPage(browser)
@@ -68,7 +70,10 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
 
     # Act
     main_page.go_to_products_catalog_page()
+    product_page = ProductPage(browser, browser.current_url)
+    product_page.go_to_product_page()
     main_page.go_to_login_page()
 
     # Assert
-    #product_page.check_success_message_of_added_product()
+    login_page = LoginPage(browser, browser.current_url)
+    login_page.check_login_page()

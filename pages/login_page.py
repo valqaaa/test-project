@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 
 
 class LoginPage(BasePage):
+    title = "Login or register"
+    title_locator = "div.container-fluid.page > div > ul > li.active"
     sign_up_email_input_locator = "id_registration-email"
     sign_up_password_input_locator = "id_registration-password1"
     confirm_sign_up_password_input_locator = "id_registration-password2"
@@ -49,10 +51,15 @@ class LoginPage(BasePage):
         login_input.send_keys(LoginPage.login)
         password_input = self.browser.find_element(By.ID, LoginPage.sign_in_password_input_locator)
         password_input.send_keys(LoginPage.password_1)
-        confirm_sugn_button = self.browser.find_element_by_name(LoginPage.sign_in_submit_locator)
+        confirm_sugn_button = self.browser.find_element(By.NAME, LoginPage.sign_in_submit_locator)
         confirm_sugn_button.click()
 
     def check_success_sign_in_message(self):
-        success_message = self.browser.find_element_by_class_name(LoginPage.success_message_locator)
+        success_message = self.browser.find_element(By.CLASS_NAME, LoginPage.success_message_locator)
         assert LoginPage.success_sign_in_message in success_message.text, \
             f"Sign in page should contain valid success message"
+
+    def check_login_page(self):
+        login_page_title = self.browser.find_element(By.CSS_SELECTOR, LoginPage.title_locator)
+        assert LoginPage.title in login_page_title.text, \
+            f"This is not login page or page title not match"
