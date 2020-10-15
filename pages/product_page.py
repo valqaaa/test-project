@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 class ProductPage(BasePage):
-    go_to_product_page_locator =  "li:nth-child(1) > article > h3 > a"
+    go_to_product_page_locator = "li:nth-child(1) > article > h3 > a"
     add_book_submit_locator = "btn-add-to-basket"
     message_locator = "alertinner"
     message1 = "has been added to your basket"
@@ -25,4 +25,4 @@ class ProductPage(BasePage):
     def check_message_for_unauthorized_user(self):
         unauthorized_message = self.browser.find_element(By.CLASS_NAME, ProductPage.message_locator)
         assert ProductPage.message2 in unauthorized_message.text, \
-            f"Product's name doesn't match"
+            f"Incorrect unauthorized message"

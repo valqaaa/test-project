@@ -9,7 +9,7 @@ class LoginPage(BasePage):
     confirm_sign_up_password_input_locator = "id_registration-password2"
     password_1 = "karandash123"
     sign_up_submit_locator = "registration_submit"
-    success_sigh_up_message = "Спасибо за егистрацию!"
+    success_sigh_up_message = "Thanks for registering!"
     success_message_locator = "alertinner"
 
     sign_in_locator = "login_link"
